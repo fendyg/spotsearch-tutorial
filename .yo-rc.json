@@ -1,0 +1,11 @@
+{
+  "generator-backbone": {
+    "appPath": "app",
+    "appName": "SpotsearchTutorial",
+    "testFramework": "mocha",
+    "templateFramework": "lodash",
+    "coffee": false,
+    "compassBootstrap": true,
+    "includeRequireJS": false
+  }
+}
