@@ -19,22 +19,22 @@ define([
         events: {},
 
         initialize: function () {
-            this.listenTo(window.searchModel, 'all', function(){
+            this.listenTo(this.model, 'all', function(){
                 console.log(arguments);
             });
-            this.listenTo(window.searchModel, 'request', this.loading)
-            this.listenTo(window.searchModel, 'change', this.render)
+            this.listenTo(this.model, 'request', this.loading)
+            this.listenTo(this.model, 'change', this.render)
         },
 
         render: function () {
-            if(window.searchModel.types === 'artist') {
+            if(this.model.types === 'artist') {
                 var template = Handlebars.compile(artistsearchTemplate);
-                this.$el.html(template(searchModel.toJSON()));
+                this.$el.html(template(this.model.toJSON()));
             }
         },
 
         loading: function () {
-            if(window.searchModel.types === 'artist') {
+            if(this.model.types === 'artist') {
                 var template = Handlebars.compile(loadingTemplate);
                 this.$el.html(template({}));
             }

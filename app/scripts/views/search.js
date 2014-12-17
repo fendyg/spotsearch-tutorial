@@ -19,21 +19,23 @@ define([
             'change input[name=type]': 'selectType'
         },
 
-        initialize: function () {
-            this.model = searchModel;
+        initialize: function (options) {
+            this.router = options.router;
         },
 
         search: function(ev) {
             ev.preventDefault();
-            window.searchModel.query = $('#search-query').val();
-            window.searchModel.fetch();
+            this.model.query = $('#search-query').val();
+            this.router.navigate('search' + '/' + this.model.types + '/' +
+                this.model.query, {trigger: true});
+            this.model.fetch();
         },
 
         selectType: function() {
             if($('input[name=type]:checked', '#spotForm').val() == 'albums') {
-                window.searchModel.types = 'album';
+                this.model.types = 'album';
             } else {
-                window.searchModel.types = 'artist';
+                this.model.types = 'artist';
             }
         },
 
