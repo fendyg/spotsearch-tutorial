@@ -1,13 +1,14 @@
 /*global SpotsearchTutorial, Backbone, JST*/
 
-SpotsearchTutorial.Views = SpotsearchTutorial.Views || {};
+define([
+    'jquery',
+    'backbone',
+    'handlebars',
+    'text!templates/albumsearch.hbs',
+    'text!templates/loading.hbs'
+    ],function($, Backbone, Handlebars, albumsearchTemplate, loadingTemplate){
 
-(function () {
-    'use strict';
-
-    SpotsearchTutorial.Views.Albumsearch = Backbone.View.extend({
-
-        template: JST['app/scripts/templates/albumsearch.ejs'],
+    var AlbumsearchView = Backbone.View.extend({
 
         tagName: 'div',
 
@@ -27,15 +28,13 @@ SpotsearchTutorial.Views = SpotsearchTutorial.Views || {};
 
         render: function () {
             if(window.searchModel.types === 'album') {
-                var albumSearchTemplate = $('#album-search-template').html();
-                var template = Handlebars.compile(albumSearchTemplate);
+                var template = Handlebars.compile(albumsearchTemplate);
                 this.$el.html(template(searchModel.toJSON()));
             }
         },
 
         loading: function () {
             if(window.searchModel.types === 'album') {
-                var loadingTemplate = $('#loading-template').html();
                 var template = Handlebars.compile(loadingTemplate);
                 this.$el.html(template({}));
             }
@@ -43,4 +42,5 @@ SpotsearchTutorial.Views = SpotsearchTutorial.Views || {};
 
     });
 
-})();
+    return AlbumsearchView;
+})

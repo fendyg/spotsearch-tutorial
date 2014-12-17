@@ -7,7 +7,9 @@
     "underscore": "~1.6.0",
     "backbone": "~1.1.0",
     "modernizr": "~2.7.1",
-    "handlebars": "~2.0.0"
+    "handlebars": "~2.0.0",
+    "requirejs": "~2.1.15",
+    "requirejs-text": "requirejs/text#~2.0.12"
   },
   "devDependencies": {}
 }

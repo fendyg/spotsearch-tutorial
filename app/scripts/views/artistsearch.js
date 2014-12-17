@@ -1,13 +1,14 @@
 /*global SpotsearchTutorial, Backbone, JST*/
 
-SpotsearchTutorial.Views = SpotsearchTutorial.Views || {};
+define([
+    'jquery',
+    'backbone',
+    'handlebars',
+    'text!templates/artistsearch.hbs',
+    'text!templates/loading.hbs'
+    ],function($, Backbone, Handlebars, artistsearchTemplate, loadingTemplate){
 
-(function () {
-    'use strict';
-
-    SpotsearchTutorial.Views.Artistsearch = Backbone.View.extend({
-
-        template: JST['app/scripts/templates/artistsearch.ejs'],
+    var ArtistsearchView = Backbone.View.extend({
 
         tagName: 'div',
 
@@ -27,15 +28,13 @@ SpotsearchTutorial.Views = SpotsearchTutorial.Views || {};
 
         render: function () {
             if(window.searchModel.types === 'artist') {
-                var artistSearchTemplate = $('#artist-search-template').html();
-                var template = Handlebars.compile(artistSearchTemplate);
+                var template = Handlebars.compile(artistsearchTemplate);
                 this.$el.html(template(searchModel.toJSON()));
             }
         },
 
         loading: function () {
             if(window.searchModel.types === 'artist') {
-                var loadingTemplate = $('#loading-template').html();
                 var template = Handlebars.compile(loadingTemplate);
                 this.$el.html(template({}));
             }
@@ -43,4 +42,5 @@ SpotsearchTutorial.Views = SpotsearchTutorial.Views || {};
 
     });
 
-})();
+    return ArtistsearchView;
+})

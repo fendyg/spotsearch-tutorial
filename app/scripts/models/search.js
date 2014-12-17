@@ -1,11 +1,11 @@
 /*global SpotsearchTutorial, Backbone*/
 
-SpotsearchTutorial.Models = SpotsearchTutorial.Models || {};
+define([
+    'jquery',
+    'backbone'
+    ],function($, Backbone){
 
-(function () {
-    'use strict';
-
-    SpotsearchTutorial.Models.Search = Backbone.Model.extend({
+    var SearchModel = Backbone.Model.extend({
 
         url: function(){
             return 'https://api.spotify.com/v1/search?q=' + this.query + '&type=' + this.types;
@@ -26,5 +26,5 @@ SpotsearchTutorial.Models = SpotsearchTutorial.Models || {};
             return response;
         }
     });
-
-})();
+    return SearchModel;
+})

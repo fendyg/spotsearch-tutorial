@@ -1,13 +1,11 @@
 /*global SpotsearchTutorial, Backbone, JST*/
 
-SpotsearchTutorial.Views = SpotsearchTutorial.Views || {};
+define([
+    'jquery',
+    'backbone',
+    ],function($,Backbone){
 
-(function () {
-    'use strict';
-
-    SpotsearchTutorial.Views.Search = Backbone.View.extend({
-
-        template: JST['app/scripts/templates/search.ejs'],
+    var SearchView = Backbone.View.extend({
 
         tagName: 'div',
 
@@ -44,5 +42,5 @@ SpotsearchTutorial.Views = SpotsearchTutorial.Views || {};
         }
 
     });
-
-})();
+    return SearchView;
+})
