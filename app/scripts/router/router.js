@@ -4,20 +4,23 @@ define([
     'views/search',
     'views/artistsearch',
     'views/albumsearch',
-    'views/albumdetail'
-    ],function($, Backbone, SearchView, ArtistSearchView, AlbumSearchView, AlbumDetailView){
+    'views/albumdetail',
+    'views/playlist'
+    ],function($, Backbone, SearchView, ArtistSearchView, AlbumSearchView, AlbumDetailView, PlaylistView){
     var Router = Backbone.Router.extend({
 
         routes: {
             '': 'homeRoute',
             'search/album/:query': 'albumSearchRoute',
             'search/artist/:query': 'artistSearchRoute',
-            'album/:albumID': 'albumViewRoute'
+            'album/:albumID': 'albumViewRoute',
+            'playlist' : 'playlistRoute'
         },
 
         initialize: function(options){
             this.searchModel = options.searchModel;
-            this.albumModel = options.albumModel
+            this.albumModel = options.albumModel;
+            this.playlistCollection = options.playlistCollection;
 
             this.searchView = new SearchView({
                 el: $('#search-container'),
@@ -37,8 +40,14 @@ define([
 
             this.albumDetailView = new AlbumDetailView({
                 el: $('#album-container'),
-                model: this.albumModel
+                model: this.albumModel,
+                collection: this.playlistCollection
             });
+
+            this.playlistView = new PlaylistView({
+                el: $('#playlist-container'),
+                collection: this.playlistCollection
+            })
         },
 
         homeRoute: function() {
@@ -49,6 +58,7 @@ define([
             $('#artist-search-container').empty();
             $('#album-search-container').empty();
             $('#album-container').empty();
+            $('#playlist-container').empty();
             this.searchModel.attributes = {};
             this.albumModel.attributes = {};
         },
@@ -75,6 +85,11 @@ define([
             this.albumModel.fetch({
                 reset: true
             });
+        },
+
+        playlistRoute: function() {
+            this.clearResults();
+            this.playlistView.render();
         }
     });
 

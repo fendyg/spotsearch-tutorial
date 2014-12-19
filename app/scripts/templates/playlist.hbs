@@ -1,0 +1,42 @@
+<div class="col-md-12 col-sm-12 col-lg-12">
+    <select class="playlist-selector form-control input-sm">
+        <option value="select">Select a playlist</option>
+        {{#if ./playlists}}
+
+            {{#each ./playlists}}
+                <option value="{{ id }}">{{ name }} </option>
+            {{/each}}
+
+        {{/if}}
+    </select>
+</div>
+
+<div class="col-md-12 col-sm-12 col-lg-12">
+    {{#if ./tracks}}
+        <hr>
+        <h1>{{ name }}</h1>
+        <hr>
+
+        <a href="{{ uri }}"><img id="current-song-image" style="border: 1px solid black; margin: 5px 20px 5px 5px; width: 200px; float: left;" src="{{ tracks.[0].imageURL }}">
+        </a>
+
+        <h2 id="playing-track"> {{ tracks.[0].name }} </h2>
+        <h3 id="playing-artist"> {{ tracks.[0].artist }}</h3>
+        <div>
+            <audio id="player" controls="controls" src="#"></audio>
+        </div>
+
+        <table class="table table-striped">
+            <tr>
+                <th>Track Name</th>
+            </tr>
+            {{#each tracks }}
+                <tr id="track-{{ @index }}">
+                    <td style="width:100%;"><a class="track" data-imageurl="{{ imageURL }}" href="{{ trackURL }}">{{ name }}</a> - {{ artist }}
+                    </td>
+                </tr>
+            {{/each}}
+        </table>
+    {{/if}}
+
+</div>
