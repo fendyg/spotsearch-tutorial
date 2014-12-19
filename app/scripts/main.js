@@ -24,6 +24,7 @@ require([
 'backbone',
 'bootstrap',
 'models/search',
+'models/album',
 'views/search',
 'views/albumsearch',
 'views/artistsearch',
@@ -33,6 +34,7 @@ function($,
     Backbone,
     bootstrap,
     SearchModel,
+    AlbumModel,
     SearchView,
     AlbumSearchView,
     ArtistSearchView,
@@ -47,8 +49,10 @@ function($,
         };
 
         SpotsearchTutorial.Models.SearchModel = new SearchModel();
+        SpotsearchTutorial.Models.AlbumModel = new AlbumModel();
         SpotsearchTutorial.Routers.Router = new Router({
-            searchModel: SpotsearchTutorial.Models.SearchModel
+            searchModel: SpotsearchTutorial.Models.SearchModel,
+            albumModel: SpotsearchTutorial.Models.AlbumModel
         });
 
         Backbone.history.start();

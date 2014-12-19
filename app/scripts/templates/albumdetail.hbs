@@ -1,0 +1,25 @@
+{{! /scripts/templates/albumdetail.hbs }}
+<div class="albumContainer">
+    <h3>Album</h3>
+    <img src="{{images.[1].url}}" alt="{{name}} Album Image">
+    <div class="title">{{name}}</div>
+    <div class="release">
+        by
+        {{#each artists}}
+        <span class="artist">{{name}}</span>
+        {{/each}}
+    </div>
+    <a href="{{uri}}">Open Album in Spotify</a>
+
+    <div class="tracks">
+        <h4>Tracks</h4>
+        <ol>
+        {{#each tracks.items}}
+            <li>
+                <div class="title">{{name}}</div>
+                <audio src="{{preview_url}}" controls></audio>
+            </li>
+        {{/each}}
+        </ol>
+    </div>
+</div>

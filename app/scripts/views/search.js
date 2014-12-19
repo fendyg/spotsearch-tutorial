@@ -25,10 +25,12 @@ define([
 
         search: function(ev) {
             ev.preventDefault();
-            this.model.query = $('#search-query').val();
-            this.router.navigate('search' + '/' + this.model.types + '/' +
-                this.model.query, {trigger: true});
-            this.model.fetch();
+            if($('#search-query').val() !== "") {
+                this.model.query = $('#search-query').val();
+                this.router.navigate('search' + '/' + this.model.types + '/' +
+                    this.model.query, {trigger: true});
+                this.model.fetch();
+            }
         },
 
         selectType: function() {
